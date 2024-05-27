@@ -1,8 +1,8 @@
-Bienvenido a una parte de la documentación de la APP [DJ PAY](https://github.com/ChemaDvp/Api_DjPay/wiki)!
+**Bienvenido** a una parte de la documentación de la APP [**DJ PAY**](https://github.com/ChemaDvp/Api_DjPay/wiki)!
 
 ## API (Java - SpringBoot)
 
-### ÍNDICE
+### **ÍNDICE**
 - [Introducción](https://github.com/ChemaDvp/Api_DjPay/wiki/Introducción)
 - [Diseño](https://github.com/ChemaDvp/Api_DjPay/wiki/Diseño)
 - [Tecnologías](https://github.com/ChemaDvp/Api_DjPay/wiki/Tecnologías)
