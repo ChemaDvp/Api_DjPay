@@ -1,4 +1,4 @@
-**Bienvenido** a una parte de la documentación de la APP [**DJ PAY**](https://github.com/ChemaDvp/Api_DjPay/wiki)!
+**Bienvenido** al repositorio que almacena la API consumida por la Aplicación Android [**DJ PAY**](https://github.com/ChemaDvp/Api_DjPay/wiki)!
 
 ## API (Java - SpringBoot)
 
