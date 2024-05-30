@@ -79,8 +79,10 @@ public class AuthService implements AuthServiceI {
     private UserDTORegister convertToDtoRegister(User user) {
         UserDTORegister userDto = new UserDTORegister();
         userDto.setUsername(user.getUsername());
-        userDto.setRol(user.getRole());
         userDto.setEmail(user.getEmail());
+        userDto.setPassword(user.getPassword());
+        userDto.setRol(user.getRole());
+
         return userDto;
     }
 

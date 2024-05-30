@@ -18,5 +18,8 @@ public class UserDTORegister implements Serializable {
     /** Email del usuario **/
     private String email;
 
+    /** Contraseña del usuario **/
+    private String password;
+
     private Rol rol;
 }

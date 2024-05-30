@@ -34,7 +34,7 @@ public class User implements UserDetails, Serializable {
     private String username;
 
     @Column(name = "email")
-    @Email(message = "El formato del correo electrónico no es válido")
+    //@Email(message = "El formato del correo electrónico no es válido")
     private String email;
 
     @Column(name = "contrasena")
