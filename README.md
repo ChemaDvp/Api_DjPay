@@ -4,10 +4,8 @@
 
 ### **ÍNDICE**
 - [Introducción](https://github.com/ChemaDvp/Api_DjPay/wiki/Introducción)
-- [Diseño](https://github.com/ChemaDvp/Api_DjPay/wiki/Diseño)
 - [Tecnologías](https://github.com/ChemaDvp/Api_DjPay/wiki/Tecnologías)
 - [Directorio](https://github.com/ChemaDvp/Api_DjPay/wiki/Directorio)
-- [Contenido](https://github.com/ChemaDvp/Api_DjPay/wiki/Contenido)
 - [Contacto](https://github.com/ChemaDvp/Api_DjPay/wiki/Contacto)
 
 #### Acerca del proyecto
