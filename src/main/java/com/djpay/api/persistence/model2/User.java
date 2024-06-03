@@ -6,10 +6,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -23,6 +20,7 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
+@Data
 @Table(name = "djpay_usuarios")
 public class User implements UserDetails, Serializable {
     @Id
@@ -45,8 +43,7 @@ public class User implements UserDetails, Serializable {
     @Column(name = "img_perfil",nullable = true)
     private String imgPerfil;
 
-    @Column(nullable = false, updatable = false)
-    @OneToMany(mappedBy = "authorId", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "author")
     @JsonBackReference
     private List<Peticion> peticiones;
 

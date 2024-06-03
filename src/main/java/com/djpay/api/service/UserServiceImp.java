@@ -1,18 +1,26 @@
 package com.djpay.api.service;
 
 import com.djpay.api.dto.UserDTO;
+import com.djpay.api.persistence.model2.Peticion;
 import com.djpay.api.persistence.model2.Rol;
 import com.djpay.api.persistence.model2.User;
+import com.djpay.api.persistence.repository2.PeticionRepository;
 import com.djpay.api.persistence.repository2.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class UserServiceImp implements UserServiceI{
     private final UserRepository userRepository;
+    private PeticionRepository peticionRepository;
+
+    private static final Logger logger = LoggerFactory.getLogger(UserServiceImp.class);
 
     @Autowired
     public UserServiceImp(UserRepository userRepository) {
@@ -31,10 +39,9 @@ public class UserServiceImp implements UserServiceI{
         UserDTO userDTO = new UserDTO();
         if (findUserByUsername(username).getRole() == Rol.Dj) {
             userDTO.setId(user.getId());
-            userDTO.setNombre(user.getUsername());
+            userDTO.setUsername(user.getUsername());
             userDTO.setEmail(user.getEmail());
             userDTO.setImgPerfil(user.getImgPerfil());
-            //userDTO.setPosts(user.getPosts());
             return userDTO;
         } else {
             System.out.println("Dj no encontrado");
@@ -44,6 +51,14 @@ public class UserServiceImp implements UserServiceI{
 
     @Override
     public List<User> getUsersDj() {
-        return userRepository.findByRole(Rol.Dj);
+        logger.info("Buscando usuarios con rol DJ");
+        List<User> users = userRepository.findByRole(Rol.Dj);
+        logger.info("Usuarios encontrados con rol DJ: {}", users);
+        return users;
+    }
+
+    @Override
+    public User getUserById(int id) {
+        return userRepository.findById(id).orElse(null);
     }
 }

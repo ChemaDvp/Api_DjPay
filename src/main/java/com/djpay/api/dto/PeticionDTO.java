@@ -15,4 +15,5 @@ public class PeticionDTO {
     public String id;
     public String contenido;
     public User auhthorId;
+
 }

@@ -7,6 +7,9 @@ import com.djpay.api.persistence.repository2.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class PeticionServiceImp implements PeticionServiceI{
     @Autowired
@@ -19,12 +22,12 @@ public class PeticionServiceImp implements PeticionServiceI{
     public String enviarPeticion(int usuarioId, String texto) {
         User usuario = userRepository.findById(usuarioId).orElse(null);
         if (usuario == null && usuario.getRole() == null && usuario.getRole().equals("Usuario")) {
-            return "Usuario no encontrado o no es del rol adecuado";
+            return "Usuario no encontrado o no es el rol adecuado";
         }
         Peticion peticion = new Peticion();
-        peticion.setAuthorId(usuario);
+        peticion.setAuthor(usuario);
         peticion.setContenido(texto);
-        peticion.setEstado("pendiente");
+        peticion.setEstado(false);
         peticionRepository.save(peticion);
         return "Petición enviada";
     }
@@ -35,8 +38,13 @@ public class PeticionServiceImp implements PeticionServiceI{
         if (peticion == null) {
             return "Petición no encontrada";
         }
-        peticion.setEstado(aceptada ? "aceptada" : "rechazada");
+        peticion.setEstado(aceptada ? true : false);
         peticionRepository.save(peticion);
         return "Respuesta registrada";
+    }
+
+    @Override
+    public List<Peticion> obtenerPeticiones() {
+        return peticionRepository.findAll();
     }
 }

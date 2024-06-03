@@ -24,17 +24,13 @@ public class Peticion implements Serializable {
     private int idPeticion;
 
     @ManyToOne
-    @JoinColumn(name = "authorId")
-    private User authorId;
+    @JoinColumn(name = "author_id")
+    private User author;
 
     @Column(name = "contenido")
     private String contenido;
 
     @Column(name = "estado")
-    private String estado;
+    private Boolean estado;
 
-    @UpdateTimestamp
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", timezone="Europe/Madrid")
-    @Column(name = "hora")
-    private LocalDateTime horaPeticion;
 }
