@@ -1,4 +1,15 @@
-**Bienvenido** al repositorio que almacena la API consumida por la Aplicación Android [**DJ PAY**](https://github.com/ChemaDvp/Api_DjPay/wiki)!
+<div align="center">
+  <h1 style="font-size: 56px;">API DJ PAY</h1>
+</div>
+
+<div align="center">
+  <h2 style="font-size: 20px;">Bienvenido al repositorio que almacena la API consumida por Dj Pay</h2>
+</div>
+
+<div align="center">
+  <h3 style="font-size: 20px;">Proyecto final de Grado DAM</h3>
+  <h4 style="font-size: 10px;">Realizado por: José Manuel Martínez Palacios</h4>
+</div>
 
 ## API (Java - SpringBoot)
 
