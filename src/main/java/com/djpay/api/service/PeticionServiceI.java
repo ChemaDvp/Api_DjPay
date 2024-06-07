@@ -7,5 +7,5 @@ import java.util.List;
 public interface PeticionServiceI {
     String enviarPeticion(int usuarioId, String texto);
     String responderPeticion(int peticionId, boolean aceptada);
-    List<Peticion> obtenerPeticiones();
+    List<Peticion> obtenerPeticiones(long id);
 }

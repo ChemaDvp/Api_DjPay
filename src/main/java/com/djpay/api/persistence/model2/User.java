@@ -26,7 +26,7 @@ public class User implements UserDetails, Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int id;
+    private long id;
 
     @Column(name = "nombre")
     private String username;
@@ -84,5 +84,8 @@ public class User implements UserDetails, Serializable {
 
     public String getUsername() {
         return email;
+    }
+    public String getName() {
+        return username;
     }
 }

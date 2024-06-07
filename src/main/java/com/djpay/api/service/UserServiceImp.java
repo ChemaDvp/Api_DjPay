@@ -38,7 +38,6 @@ public class UserServiceImp implements UserServiceI{
 
         UserDTO userDTO = new UserDTO();
         if (findUserByUsername(username).getRole() == Rol.Dj) {
-            userDTO.setId(user.getId());
             userDTO.setUsername(user.getUsername());
             userDTO.setEmail(user.getEmail());
             userDTO.setImgPerfil(user.getImgPerfil());
@@ -55,10 +54,5 @@ public class UserServiceImp implements UserServiceI{
         List<User> users = userRepository.findByRole(Rol.Dj);
         logger.info("Usuarios encontrados con rol DJ: {}", users);
         return users;
-    }
-
-    @Override
-    public User getUserById(int id) {
-        return userRepository.findById(id).orElse(null);
     }
 }

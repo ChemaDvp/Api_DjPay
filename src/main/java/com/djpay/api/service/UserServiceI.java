@@ -10,5 +10,5 @@ import java.util.List;
 public interface UserServiceI {
     UserDTO findUserByUsernameDTO(String username);
     List<User> getUsersDj();
-    User getUserById(int id);
+
 }

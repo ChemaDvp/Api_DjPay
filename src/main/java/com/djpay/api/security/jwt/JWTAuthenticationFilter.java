@@ -1,6 +1,7 @@
 package com.djpay.api.security.jwt;
 
 import com.djpay.api.security.services.JWTService;
+import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -55,21 +56,24 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
             return;
         }
 
-        username = jwtMngm.getUsernameFromToken(token);
+        try {
+            username = jwtMngm.getUsernameFromToken(token);
 
-        if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+            if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
 
-            UserDetails userDetails =userDetailsService.loadUserByUsername(username);
+                UserDetails userDetails =userDetailsService.loadUserByUsername(username);
 
-            if (jwtMngm.isTokenValid(token, userDetails)) {
-                UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
-                        userDetails, null, userDetails.getAuthorities()
-                );
+                if (jwtMngm.isTokenValid(token, userDetails)) {
+                    UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
+                            userDetails, null, userDetails.getAuthorities()
+                    );
 
-                authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-
-                SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+                    authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                    SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+                }
             }
+        } catch (ExpiredJwtException e) {
+            System.out.println("Token JWT expirado: " + e.getMessage());
         }
 
         filterChain.doFilter(request, response);

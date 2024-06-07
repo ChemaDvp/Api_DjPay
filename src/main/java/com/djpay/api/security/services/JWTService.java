@@ -140,6 +140,7 @@ public class JWTService implements JWTServiceI{
      * @return true si el token ha expirado, false de lo contrario.
      */
     private boolean isTokenExpired(String token) {
+
         return getExpiration(token).before(new Date());
     }
 

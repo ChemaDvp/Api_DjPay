@@ -13,12 +13,15 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 @RestController
 @RequestMapping("/api/v1/peticion")
 @RequiredArgsConstructor
 @CrossOrigin
 public class PeticionController {
+    private static final Logger logger = Logger.getLogger(PeticionController.class.getName());
+
     @Autowired
     private PeticionServiceI peticionServiceI;
 
@@ -30,21 +33,15 @@ public class PeticionController {
 
     @PostMapping("/enviar/{usuarioId}")
     public String enviarPeticion(@PathVariable int usuarioId, @RequestBody String texto) {
-        User usuario = userServiceI.getUserById(usuarioId);
-        if (usuario == null || !"Usuario".equals(usuario.getRole())) {
-            return "Usuario no encontrado o no es el rol adecuado";
-        }
-        Peticion peticion = new Peticion();
-        peticion.setAuthor(usuario);
-        peticion.setContenido(texto);
-        peticion.setEstado(false);
-        peticionRepository.save(peticion);
-        listaPeticiones.add(peticion);
-        return "Petición enviada";
+        logger.info("Recibida solicitud para enviar petición para el usuario con ID: " + usuarioId + " con el mensaje: " + texto);
+        String resultado = peticionServiceI.enviarPeticion(usuarioId, texto);
+        logger.info("Resultado del envío de petición: " + resultado);
+        return resultado;
     }
 
     @PostMapping("/respuesta")
     public String responderPeticion(@PathVariable int peticionId, @RequestParam boolean aceptada) {
+        logger.info("Respondiendo petición con ID: " + peticionId + " con estado aceptada: " + aceptada);
         return peticionServiceI.responderPeticion(peticionId, aceptada);
     }
 
@@ -52,21 +49,14 @@ public class PeticionController {
     @GetMapping("/listaPeticiones")
     public ResponseEntity<List<Peticion>> getAllPeticiones() {
         try {
-            List<Peticion> listaPeticiones = userServiceI.getAllPeticiones();
-            return ResponseEntity.ok(listaPeticiones);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
-    }
-     */
-
-    @GetMapping("/listaPeticiones")
-    public ResponseEntity<List<Peticion>> getAllPeticiones() {
-        try {
+            logger.info("Obteniendo todas las peticiones");
             List<Peticion> listaPeticiones = peticionServiceI.obtenerPeticiones();
+            logger.info("Lista de peticiones obtenida: " + listaPeticiones);
             return ResponseEntity.ok(listaPeticiones);
         } catch (Exception e) {
+            logger.severe("Error al obtener las peticiones: " + e.getMessage());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
+    */
 }
